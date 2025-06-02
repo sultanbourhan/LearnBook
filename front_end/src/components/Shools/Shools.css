@@ -1,0 +1,71 @@
+.schoolss{
+    flex: 1;
+    width: 100%;
+background-color: var(--box-color);
+height: fit-content;
+position: sticky;
+border-radius: var(--border-radius);
+overflow: hidden;
+border: 1px solid var(--hover-color);
+}
+@media(max-width:1191px){
+}
+.ov{
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 53px;
+}
+
+.schoolss .Suggestions{
+    color: var(--title-color);
+    font-size: var(--title-mini-size);
+padding: 10px 20px 15px;
+    border-bottom: 2px solid var(--hover-color);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.schoolss .main_info{
+
+display: flex;
+flex-direction: column;
+gap: 5px;
+padding: 10px 20px 15px;
+border-bottom: 1px solid var(--hover-color);
+
+}
+.schoolss .main_info .info_schools{
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+}
+.schoolss .main_info .info_schools img{
+width: 40px;
+border-radius: 50%;
+}
+.schoolss .main_info .info_schools .schools_infos{
+display: flex;
+flex-direction: column;
+}
+.schoolss .main_info .info_schools .schools_infos p{
+color: var(--title-color);
+font-size: var(--text-size);
+}
+.schoolss .main_info .info_schools .schools_infos span{
+color: var(--text-color);
+font-size: var(--text-mini-size);
+}
+
+
+.websit_button.follow_active{
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+
+
+
+

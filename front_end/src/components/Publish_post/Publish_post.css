@@ -1,0 +1,91 @@
+.Publish_post {
+    background-color: var(--box-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--hover-color);
+}
+@media(max-width:767px){
+    .Publish_post{
+        border-radius: 0;
+    }
+}
+
+.Publish_post .info_publish {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hover-color);
+    padding: 15px 20px;
+}
+
+.Publish_post .info_publish img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.Publish_post .info_publish textarea {
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--body-color);
+    border: 2px solid transparent;
+    color: var(--text-color);
+    resize: none ;
+    max-height: 150px;
+}
+.Publish_post .info_publish textarea:focus {
+    outline: none;
+    border: 2px solid var(--main-color);
+}
+
+.Publish_post .info_publish input:focus {
+    outline: none;
+    border: 2px solid var(--main-color);
+}
+
+.Publish_post .icon_publish {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+   padding: 5px 0;
+}
+
+.Publish_post .icon_publish .icon_text_publish {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.Publish_post .icon_publish .icon_text_publish:hover{
+background-color: var(--body-color);
+}
+
+.Publish_post .icon_publish .icon_text_publish svg {
+    width: 18px;
+}
+
+.Publish_post .icon_publish .icon_text_publish:nth-child(1) svg {
+    color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
+.Publish_post .icon_publish .icon_text_publish:nth-child(2) svg {
+    color: rgb(34 197 94 / var(--tw-text-opacity, 1));
+}
+
+.Publish_post .icon_publish .icon_text_publish:nth-child(3) svg {
+    color: rgb(59 130 246 / var(--tw-text-opacity, 1));
+}
+
+.Publish_post .icon_publish .icon_text_publish p {
+    font-size: var(--text-size);
+    color: var(--text-color);
+        font-weight: 300;
+}
+@media(max-width:767px){
+   .Publish_post .icon_publish .icon_text_publish p{
+        font-size: var(--text-mini-size);
+    }
+}

@@ -1,0 +1,573 @@
+.main_profile_post {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  gap: 30px;
+
+}
+
+@media(max-width:1190px) {
+  .home .container .main_profile_post {
+    width: 100%;
+  }
+
+}
+
+.main_profile_post .profile {
+  position: relative;
+  z-index: 1;
+}
+
+.main_profile_post .profile .back_img {
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  z-index: -100;
+  height: 300px;
+}
+
+.main_profile_post .profile .back_img img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+}
+
+.main_profile_post .profile .profile_all {
+  width: 90%;
+  background-color: var(--box-color);
+  padding: 20px;
+  /* position: absolute; */
+  /* bottom: -60%; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+    border-radius: var(--border-radius);
+  position: relative;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  margin: auto;
+  margin-top: 200px;
+  border: 1px solid var(--hover-color);
+}
+
+.main_profile_post .profile .profile_all > img {
+  width: 100px;
+  position: absolute;
+  top: -50px;
+  padding: 5px;
+  background-color: white;
+  border-radius: 50%;
+  left: 20px;
+  /* transform: translateX(-50%); */
+  border: 1px solid #ddd;
+}
+
+.main_profile_post .profile .profile_all .Frends{
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 10px;
+  width: fit-content;
+}
+.main_profile_post .profile .profile_all .Frends  p{
+  color: var(--text-color);
+    font-size: var(--text-size);
+        font-weight: 600;
+}
+.main_profile_post .profile .profile_all .Frends  p span{
+        font-weight: 500;
+}
+
+.main_profile_post .profile .profile_all .Frends .img_frend {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  width: fit-content;
+}
+
+
+.main_profile_post .profile .profile_all .Frends .img_frend > img{
+  width: 35px ;
+  height: 35px;
+  border-radius: 50%;
+  margin-left: -10px;
+  border: 1px solid var(--hover-color);
+  position: relative;
+  transition: all 0.3s;
+}
+
+.main_profile_post .profile .profile_all .Frends .img_frend > span{
+  width: 35px ;
+  height: 35px;
+  border-radius: 50%;
+  margin-left: -35px;
+  border: 1px solid var(--hover-color);
+  background-color: var(--hover-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.main_profile_post .profile .profile_all .Frends .img_frend:hover > img{
+  opacity: 0.9;
+}
+
+
+
+.main_profile_post .profile .profile_all .Frends .img_frend > img:nth-child(1){
+  margin-left: 0;
+  z-index: 6;
+}
+.main_profile_post .profile .profile_all .Frends .img_frend > img:nth-child(2){
+z-index: 5;
+}
+.main_profile_post .profile .profile_all .Frends .img_frend > img:nth-child(3){
+z-index: 4;
+}
+.main_profile_post .profile .profile_all .Frends .img_frend > img:nth-child(4){
+z-index: 3;
+}
+.main_profile_post .profile .profile_all .Frends .img_frend > img:nth-child(5){
+z-index: 2;
+margin-left: -35px;
+transition: all 0.3s;
+}
+.main_profile_post .profile .profile_all .Frends .img_frend > img:nth-child(6){
+z-index: 1;
+margin-left: -35px;
+transition: all 0.3s;
+}
+
+
+.main_profile_post .profile .profile_all .Frends:hover .img_frend img:nth-child(5){
+  margin-left: -10px
+}
+.main_profile_post .profile .profile_all .Frends:hover .img_frend img:nth-child(6){
+  margin-left: -10px
+}
+
+.main_profile_post .profile .profile_all .Frends:hover .img_frend > span{
+ margin-left: -10px
+}
+
+.main_profile_post .All_frends {
+  background-color: var(--box-color);
+  border: 1px solid var(--hover-color);
+  /* padding:  10px 0; */
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: var(--border-radius);
+  /* height: 300px; */
+  /* overflow: hidden; */
+  max-width: 300px;
+  margin: auto;
+  display: none;
+  transition: all 0.5s;
+  position: absolute;
+  top: 65px;
+    left: -20px;
+    z-index: 1;
+    width: 350px;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+
+.main_profile_post .profile .profile_all .Frends:hover .All_frends{
+display: flex;
+animation: fadeInOverlay 0.5s ease forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.main_profile_post .All_frends h3{
+      font-size: var(--title-mini-size);
+    color: var(--text-color);
+    padding: 10px  15px;
+    border-bottom: 2px solid var(--hover-color);
+    width: 100%;
+}
+.main_profile_post .All_frends .bax_frends {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow-y:scroll ;
+  max-height: 300px;
+  scrollbar-width: none;
+}
+
+
+
+.main_profile_post .All_frends .one_frends{
+  display: flex;
+  gap: 10px;
+  width:100%;
+  align-items: center;
+  padding: 10px 15px;
+  /* border-radius: var(--border-radius); */
+  border-bottom: 1px solid var(--hover-color);
+}
+
+
+.main_profile_post .All_frends .one_frends:last-child{
+  border-bottom: none;
+}
+
+
+
+.main_profile_post .All_frends .one_frends img{
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius);
+border-radius: 50%;
+}
+.main_profile_post .All_frends .one_frends  .email_name p:nth-child(1){
+      font-size: var(--text-size);
+    color: var(--title-color);
+}
+.main_profile_post .All_frends .one_frends  .email_name p:nth-child(2){
+      font-size: var(--text-mini-size);
+    color: var(--title-color);
+}
+
+
+@media(max-width:767px) {
+ .main_profile_post .All_frends .one_frends{
+  width: 100%;
+ }
+ .main_profile_post .profile .profile_all{
+  padding-top: 60px;
+ }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main_profile_post .profile .profile_all .info_me {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-top:10px ;
+}
+
+.main_profile_post .profile .profile_all .info_me h3 {
+  color: var(--title-color);
+}
+
+.main_profile_post .profile .profile_all h2 {
+  color: var(--title-color);
+  text-align: center;
+}
+
+.main_profile_post .profile .profile_all .info_me p {
+  color: var(--text-color);
+  text-align: center;
+  font-size: var(--text-size);
+}
+
+.main_profile_post .profile .profile_all .info_me p>span {
+  font-weight: 600;
+}
+
+
+.bosts > h3 {
+  background-color: var(--box-color);
+    border-radius: var(--border-radius);
+  padding: 20px;
+  text-align: center;
+  color: var(--title-color);
+  font-size: var(--title-mini-size);
+}
+
+.main_profile_post .bosts .all_bost {
+  position: relative;
+}
+
+
+
+
+/* From Uiverse.io by sihamjardi */
+
+ .remove_div-but {
+  width: fit-content;
+}
+.remove_div-but .buttonnn {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  top: 20px;
+  right: 20px;
+  font-size: 22px;
+  color: var(--title-color);
+  z-index: 10;
+}
+.remove_div-but .remove_but{
+position: absolute;
+top: 45px;
+right:15px;
+background-color: var(--body-color);
+border-radius: var(--border-radius);
+width: 200px;
+box-shadow: 0 2px 8px var(--shadow-color);
+display: none;
+}
+ .remove_div-but .remove_but p{
+padding:10px;
+color: var(--text-color);
+cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s all;
+    border-radius: var(--border-radius);
+}
+ .remove_div-but .remove_but p:hover{
+color: white;
+background-color:rgb(231 151 151) !important;
+}
+/* .buttonnn,
+.button__icon,
+.button__text {
+  transition: all 0.3s;
+}
+
+.buttonnn .button__text {
+  transform: translateX(16px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.buttonnn .button__icon {
+  position: absolute;
+  transform: translateX(70px);
+  height: 100%;
+  width: 30px;
+  background-color: #cc0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonnn .svg {
+  width: 20px;
+} */
+
+
+/* .buttonnn:hover .button__text {
+  color: transparent;
+}
+
+.buttonnn:hover .button__icon {
+  width: 100px;
+  ;
+  transform: translateX(0);
+}
+
+.buttonnn:active .button__icon {
+  background-color: #b20000;
+}
+
+.buttonnn:active {
+  border: 1px solid #b20000;
+} */
+
+
+
+
+/* ======================================== */
+
+
+.Confirm_deletion {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(159 159 159 / 50%);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  /* تأثير البلور */
+}
+
+.Confirm_delet {
+  width: 50%;
+  height: fit-content;
+  background: rgb(255, 255, 255);
+    border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.068);
+  background-color: var(--box-color);
+}
+
+@media(max-width:767px) {
+  .Confirm_delet {
+    width: 90%;
+  }
+}
+
+.Confirm_delet .card-content {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.Confirm_delet .card-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--title-color);
+}
+
+.Confirm_delet .card-description {
+  color: var(--text-color);
+}
+
+.Confirm_delet .card-button-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.Confirm_delet .card-button {
+  width: 50%;
+  height: 35px;
+    border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.Confirm_delet .primary {
+  background-color: rgb(255 142 138);
+  color: white;
+}
+
+.Confirm_delet .primary:hover {
+  background-color: rgb(255, 73, 66);
+}
+
+.Confirm_delet .secondary {
+  background-color: var(--body-color);
+  color: var(--title-color);
+}
+
+.Confirm_delet .secondary:hover {
+  background-color: rgb(197, 197, 197);
+}
+
+.Confirm_delet .exit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.Confirm_delet .exit-button:hover svg {
+  fill: black;
+}
+
+.Confirm_delet .exit-button svg {
+  fill: rgb(175, 175, 175);
+}
+
+
+.description_profile {
+  width: 100%;
+  background-color: var(--box-color);
+  padding: 20px;
+    border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  margin: auto;
+  color: var(--text-color);
+  border: 1px solid var(--hover-color);
+  font-size: var(--text-size);
+}
+
+.description_profile h3 {
+  color: var(--title-color);
+  font-size: var(--title-mini-size);
+}
+
+
+.buttom_F{
+  display: flex;
+  justify-content: end;
+}
+
+.buttom_F p {
+background-color: var(--body-color);
+padding: 10px ;
+border-radius: 10px;
+    font-size: var(--text-size);
+}
+.buttom_F .accept_G{
+  width: auto;
+  gap: 10px;
+}
+
+.buttom_F .accept_G button{
+  transition: all 0.3s;
+}
+
+.buttom_F .accept_G button:nth-child(1) {
+background-color: var(--body-color);
+color: black
+}
+
+.buttom_F .accept_G button:nth-child(2):hover {
+    box-shadow: 0 0 8px var(--main-color);
+}

@@ -1,0 +1,15 @@
+/* From Uiverse.io by Cornerstone-04 */ 
+.loader_button {
+  width: 25px;
+  height: 25px;
+  border: 3px solid #f0ebff;
+  border-top-color: var(--main-color);
+  animation: spin013151 1s linear infinite;
+  border-radius: 100%;
+}
+
+@keyframes spin013151 {
+  to {
+    transform: rotate(360deg);
+  }
+}

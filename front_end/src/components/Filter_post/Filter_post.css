@@ -1,0 +1,94 @@
+.Filter_post{
+    padding: 10px;
+    background-color: var(--box-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--hover-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+@media(max-width:767px){
+    .Filter_post{
+        border-radius: 0;
+        /* display: none; */
+    }
+}
+.Filter_post .button_filter{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.Filter_post .button_filter button{
+    color: var(--text-color);
+    background-color: var(--body-color);
+    box-shadow: none;
+}
+
+
+.Filter_post .button_filter .active{
+     background-color: var(--main-color);
+     color: white;
+}
+
+.Filter_post .select {
+position: relative;
+}
+.Filter_post .select span{
+        position: absolute;
+    font-size: var(--text-mini-size);
+    color: var(--icon-color);
+    top: -6px;
+    left: 15px;
+    background-color: var(--box-color);
+    padding: 0 2px;
+    z-index: 10;
+}
+.Filter_post .select select{
+        padding: 8px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--hover-color);
+    color: var(--text-color);
+    font-size: var(--text-size);
+    background-color: var(--box-color);
+}
+.Filter_post .select select:focus{
+    outline: none;
+    border-color: var(--main-color);
+}
+.Filter_post .select select option{
+background-color: var(--body-color);
+}
+
+
+@media(max-width:767px){
+    .Filter_post{
+        flex-direction: column-reverse;
+        gap: 15px;
+    }
+    .Filter_post .select{
+        width: 100%;
+    }
+    .Filter_post .select select{
+        width: 100%;
+    }
+    .Filter_post .button_filter{
+        width: 100%;
+    }
+    .Filter_post .button_filter button{
+        margin: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

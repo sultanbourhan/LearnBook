@@ -1,0 +1,231 @@
+.info_menu {
+    width: 100%;
+    background-color: var(--box-color);
+    height: fit-content;
+    position: sticky;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--hover-color);
+}
+
+.mobile-toggle {
+    width: 100%;
+}
+
+@media(max-width:1191px) {
+    .info_menu {
+        width: fit-content;
+        position: absolute;
+        top: 59px;
+        right: 0;
+        z-index: 100;
+    }
+}
+
+@media(max-width:767px) {
+    .info_menu {
+        width: 100%;
+        right: 0;
+        border-radius: 0;
+    }
+}
+
+.info_menu .info_user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--hover-color);
+}
+
+.info_menu .info_user img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.info_menu .info_user .info_data {
+    display: flex;
+    flex-direction: column;
+}
+
+.info_menu .info_user .info_data p {
+    font-size: var(--text-size);
+    color: var(--title-color);
+}
+
+.info_menu .info_user .info_data span {
+    font-size: var(--text-mini-size);
+    color: var(--text-color);
+}
+
+.info_menu .info_link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@media(max-width:768px){
+   .info_menu .info_link {
+    justify-content: start;
+    padding: 10px 0;
+   }
+}
+
+.info_menu .info_link .navbar_link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.info_menu .info_link .navbar_link svg {
+    width: 20px;
+    color: var(--icon-color);
+}
+
+.info_menu .info_link .navbar_link p {
+    font-size: var(--text-size);
+    color: var(--text-color);
+}
+
+
+.info_menu .info_link .navbar_link:not(.logout, .more):hover {
+    background-color: var(--body-color);
+    transition: 0.3s all;
+}
+
+.info_menu .info_link .navbar_link:not(.logout, .more)::after {
+    content: '';
+    width: 4px;
+    height: 0;
+    background-color: var(--main-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s all;
+}
+
+.info_menu .info_link .navbar_link:hover::after {
+    height: 100%;
+}
+
+.info_menu .info_link .navbar_link:not(.logout):hover svg {
+    color: var(--main-color);
+}
+
+.info_menu .active {
+    background-color: var(--body-color);
+    color: var(--main-color);
+}
+
+.info_menu .active svg {
+    color: var(--main-color) !important;
+}
+
+.info_menu .active p {
+    color: var(--main-color) !important;
+}
+
+.info_menu .active::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 100% !important;
+    background-color: var(--main-color) !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+}
+
+
+.info_menu .info_link .logout {
+    color: var(--text-color);
+}
+.info_menu .info_link .logout:hover {
+    background-color: rgb(255 196 196);
+}
+
+.info_menu .info_link .logout svg {
+    color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
+.info_menu .info_link .logout:hover p{
+color: #3b3b3b !important;
+}
+
+.info_menu .info_link .logout::after {
+    content: '';
+    width: 4px;
+    height: 0;
+    background-color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s all;
+}
+
+.info_menu .info_link .navbar_link:hover::after {
+    height: 100%;
+}
+
+
+
+.info_menu .info_link .more {
+    gap: 0;
+
+}
+
+
+
+
+.extra-options {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.extra-options.show {
+    max-height: 200px;
+    /* تكفي لعرض المحتوى */
+    opacity: 1;
+}
+
+.logout p {
+    color: var(--text-color) !important;
+}
+
+.more {
+    background-color: var(--box-color) !important;
+}
+
+.info_menu .more::after {
+    height: 0 !important;
+}
+
+@media(max-width:767px) {
+    .info_menu {
+        width: 100%;
+        right: 0;
+        border-radius: 0;
+    }
+
+
+
+}
+
+
+
+@media(max-width:1191px) {
+    .mobile-toggle {
+        display: none;
+    }
+
+    .mobile-toggle.show {
+        display: block;
+    }
+}
+
+
+
