@@ -317,6 +317,7 @@
   margin: 0 10px;
 }
 
+
 .chat-container .me {
   align-self: flex-end;
   /* flex-direction: row-reverse; */
@@ -328,6 +329,14 @@
   color: #fff;
   font-size: var(--text-size);
 }
+.chat-container .me p a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.chat-container .me p:hover a{
+  text-decoration: underline;
+}
 
 .chat-container .other {
   align-self: flex-start;
@@ -337,6 +346,14 @@
   background-color: var(--box-color);
   color: var(--text-color);
   font-size: var(--text-size);
+}
+
+.chat-container .other p a{
+  color: var(--text-color);
+  text-decoration: none;
+}
+.chat-container .other p:hover a{
+  text-decoration: underline;
 }
 
 .chat-container .chat-input {

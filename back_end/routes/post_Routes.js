@@ -14,6 +14,7 @@ const {
   createPost_4,
   createPost_6,
   getAllPosts,
+  getOnePost,
   getUserPosts,
   deletePost,
   create_post_comments,
@@ -65,6 +66,9 @@ post_routes.route("/post_4_chick")
 
 post_routes.route("")
 .get(check_login,getAllPosts)
+
+post_routes.route("/getOnePost/:type/:id")
+.get(check_login,getOnePost)
 
 post_routes.route("/getUserPosts/:userId")
 .get(check_login,getUserPosts)

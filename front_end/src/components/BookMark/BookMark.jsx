@@ -198,6 +198,8 @@ const apiUrl = import.meta.env.VITE_API_URL;
           headers: { Authorization: `Bearer ${cookies.token}` },
         }
       );
+            queryClient.invalidateQueries(['myData'])
+
       setLikeds(!likeds);
     } catch (error) {
       console.error("Error fetching data", error);
@@ -213,6 +215,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
           headers: { Authorization: `Bearer ${cookies.token}` },
         }
       );
+            queryClient.invalidateQueries(['myData'])
     } catch (error) {
       console.error("Error fetching data", error);
     }
@@ -279,7 +282,6 @@ const apiUrl = import.meta.env.VITE_API_URL;
       );
 
       // استلام البيانات من الـ API
-      console.log(res.data);
     } catch (error) {
       console.error("Error fetching data", error); // في حال حدوث خطأ
     }

@@ -17,6 +17,7 @@ export const UserProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]); // الإشعارات للمستخدم
   const [type_post, setType_post] = useState(""); // الإشعارات للمستخدم
   const [type_post_role, setType_post_role] = useState(""); 
+  const [Share_post_chat, setShare_post_chat] = useState(""); 
   
  const [cookies, setCookies] = useCookies(["token"]);
 
@@ -48,7 +49,8 @@ const [messages, setMessages] = useState([]);
       notifications, setNotifications ,
       type_post, setType_post,
       type_post_role, setType_post_role,
-      MyData, setMyData
+      MyData, setMyData,
+      Share_post_chat, setShare_post_chat
     }}>
       {children}
     </UserContext.Provider>

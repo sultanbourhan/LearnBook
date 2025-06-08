@@ -580,20 +580,20 @@ queryClient.invalidateQueries(['AllPost']);
                       <h3>Information:</h3>
                       {MyData.address ? (
                         <p>
-                          <span>{t('Addres:')} </span> {MyData.address}
+                          <span>{t('Addres')} </span> {MyData.address}
                         </p>
                       ) : null}
                       {MyData.phone ? (
                         <p>
-                          <span>{t('Phone:')} </span> {MyData.phone}
+                          <span>{t('Phone')} </span> {MyData.phone}
                         </p>
                       ) : null}
                       <p>
-                        <span>{t('Email:')} </span> {MyData.email}
+                        <span>{t('Email')}: </span> {MyData.email}
                       </p>
                     </div>
                     <div className="Frends">
-                      <p>{t('Friends:')} <span>{MyData_friends?.length}</span></p>
+                      <p>{t('Friends')}: <span>{MyData_friends?.length}</span></p>
                       {MyData_friends?.length > 0 && <div className="img_frend">
 
                          {MyData_friends?.slice(0, 6).map((friend)=> 

@@ -173,9 +173,10 @@ const Header = () => {
               <div className="profile_svg">
                <FontAwesomeIcon icon={faFlag} />
                <div className="Languages">
-                <p onClick={() => changeLanguage('en')}><Flag code="US" style={{ width: 32, height: 20 }} /> English</p>
-                <p onClick={() => changeLanguage('es')}><Flag code="ES" style={{ width: 32, height: 20 }} /> Español</p>
-                <p onClick={() => changeLanguage('ca')}><Flag code="ES" style={{ width: 32, height: 20 }} /> Català</p>
+                <p onClick={() => changeLanguage('en')}> English</p>
+                <p onClick={() => changeLanguage('es')}> Español</p>
+                <p onClick={() => changeLanguage('ca')}> Català</p>
+                <p onClick={() => changeLanguage('fr')}> Français</p>
               </div>
               </div>
               

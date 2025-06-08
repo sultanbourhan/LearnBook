@@ -519,21 +519,21 @@ const Get_Shoole_By_Id = () => {
                     <h3>{t('Information:')}</h3>
                     {GetDataById.address ? (
                       <p>
-                        <span>{t('Addres:')} </span> {GetDataById.address}
+                        <span>{t('Addres')} </span> {GetDataById.address}
                       </p>
                     ) : null}
                     {GetDataById.phone ? (
                       <p>
-                        <span>{t('Phone:')} </span> {GetDataById.phone}
+                        <span>{t('Phone')} </span> {GetDataById.phone}
                       </p>
                     ) : null}
                     <p>
-                      <span>{t('Email:')} </span> {GetDataById.email}
+                      <span>{t('Email')}: </span> {GetDataById.email}
                     </p>
                   </div>
                   <div className="Frends">
                     <p>
-                      {t('Friends:')} <span>{GetDataById?.friends?.length }</span>
+                      {t('Friends')}: <span>{GetDataById?.friends?.length }</span>
                     </p>
                     {GetDataById?.friends?.length > 0 && <div className="img_frend">
                       {GetDataById?.friends?.slice(0, 6).map((friend) => (

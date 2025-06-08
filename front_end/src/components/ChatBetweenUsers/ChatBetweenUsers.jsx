@@ -24,6 +24,8 @@ const ChatBetweenUsers = () => {
 const { t } = useTranslation();
   const apiUrl = import.meta.env.VITE_API_URL;
 
+    const { Share_post_chat, setShare_post_chat } = useUser();
+
   const { userById } = useUser();
   const [reload, setReload] = useState(false);
   const [loadingRequest, setLoadingRequest] = useState(true);
@@ -40,10 +42,17 @@ const { t } = useTranslation();
   const bottomRef = useRef(null);
   const chatBoxRef = useRef(null);
 
+
+
   // ✅ دعم الرموز التعبيرية
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [input, setInput] = useState(""); // استخدام `input` بدلًا من `message` للحفاظ على التناسق
-
+  useEffect(()=>{
+    if(Share_post_chat !== ""){
+      console.log(Share_post_chat)
+      setInput(Share_post_chat)
+    }
+  },[Share_post_chat])
   // 🆕 أضف هذا في أعلى الكومبوننت
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -239,7 +248,13 @@ const { t } = useTranslation();
 
       setChat(res.data.chat.messages);
       setSelectedFiles([]); // 🆕 إفراغ الملفات بعد الإرسال
+      setShare_post_chat("")
       setNot_Chat(false);
+      // console.log(Share_post_chat)
+      setInput("")
+      setShare_post_chat("")
+
+
 
 
     } catch (err) {
@@ -313,6 +328,15 @@ const { t } = useTranslation();
     };
   }, [showEmojiPicker]);
 
+  const isValidUrl = (string) => {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
+
   return (
     <div className="chat-container">
       {loadingChat ? (
@@ -335,13 +359,13 @@ const { t } = useTranslation();
               <div className="user_img_name">
                 <img
                   src={
-                    userById.profilImage
-                      ? userById.profilImage.startsWith("http")
-                        ? userById.profilImage
-                        : `${apiUrl}/user/${userById.profilImage}`
+                    userById?.profilImage
+                      ? userById?.profilImage.startsWith("http")
+                        ? userById?.profilImage
+                        : `${apiUrl}/user/${userById?.profilImage}`
                       : "/image/pngegg.png"
                   }
-                  alt={`Image of ${userById.name}`}
+                  alt={`Image of ${userById?.name}`}
                 />
                 <p>{userById?.name}</p>
               </div>
@@ -458,7 +482,20 @@ const { t } = useTranslation();
                   )}
 
 
-                  {msg.content && <p>{msg.content}</p>}
+                  <p>
+                    {isValidUrl(msg.content) ? (
+                      <a
+                        href={msg.content}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ cursor: "pointer" }}
+                      >
+                        {msg.content}
+                      </a>
+                    ) : (
+                      msg.content
+                    )}
+                  </p>
                 </div>
               );
             })}
@@ -488,11 +525,12 @@ const { t } = useTranslation();
                 className="emoji-button"
                 title="Attach file"
               >
-<svg  xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15h-3a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3h6a3 3 0 0 1 3 3v3" /><path d="M9 9m0 3a3 3 0 0 1 3 -3h6a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-6a3 3 0 0 1 -3 -3z" /><path d="M3 12l2.296 -2.296a2.41 2.41 0 0 1 3.408 0l.296 .296" /><path d="M14 13.5v3l2.5 -1.5z" /><path d="M7 6v.01" /></svg>              </label>
+<svg  xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15h-3a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3h6a3 3 0 0 1 3 3v3" /><path d="M9 9m0 3a3 3 0 0 1 3 -3h6a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-6a3 3 0 0 1 -3 -3z" /><path d="M3 12l2.296 -2.296a2.41 2.41 0 0 1 3.408 0l.296 .296" /><path d="M14 13.5v3l2.5 -1.5z" /><path d="M7 6v.01" /></svg>              </label>
 
               <input
                 name="content"
                 type="text"
+                value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onClick={() => setShowEmojiPicker(false)}
                 placeholder="Write a letter..."
@@ -527,6 +565,7 @@ const { t } = useTranslation();
             )}
 
             <button
+            // onClick={()=>{setShare_post_chat("")}}
               type="submit"
               style={
                 loadingChat
@@ -535,7 +574,8 @@ const { t } = useTranslation();
               }
             >
               {/* Send */}
-<svg  xmlns="http://www.w3.org/2000/svg"  width="25"  height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>            </button>
+<svg  xmlns="http://www.w3.org/2000/svg"  width="25"  height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round"  ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>           
+ </button>
             {/* <FontAwesomeIcon icon={faPaperPlane} /> */}
           </form>
         </div>

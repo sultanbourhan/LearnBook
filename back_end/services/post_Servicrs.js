@@ -652,6 +652,55 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
   }
 });
 
+// =======================================================================
+
+
+exports.getOnePost = asyncHandler(async (req, res, next) => {
+  const { id, type } = req.params;
+
+  // تأكد من وجود النوع
+  if (!type) {
+    return res.status(400).json({ message: "Post type is required in the URL" });
+  }
+
+  // خيارات populate
+  const populateOptions = [
+    { path: 'user' },
+    { path: 'comments.user_comment' },
+  ];
+
+  let post;
+  switch (type) {
+    case "post":
+      post = await Post.findById(id).populate(populateOptions);
+      break;
+    case "post_1":
+      post = await Post_1.findById(id).populate(populateOptions);
+      break;
+    case "post_2":
+      post = await Post_2.findById(id).populate(populateOptions);
+      break;
+    case "post_3":
+      post = await Post_3.findById(id).populate(populateOptions);
+      break;
+    case "post_4":
+      post = await Post_4.findById(id).populate(populateOptions);
+      break;
+    case "post_6":
+      post = await Post_6.findById(id).populate(populateOptions);
+      break;
+    default:
+      return res.status(400).json({ message: "Invalid post type" });
+  }
+
+  if (!post) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+
+  res.status(200).json({ data: post });
+});
+
+
 
 
 // =======================================================================

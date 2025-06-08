@@ -7,6 +7,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import translationEN from './locales/en/translation.json';
 import translationES from './locales/es/translation.json';
 import translationCA from './locales/ca/translation.json';
+import translationFR from './locales/fr/translation.json';
 
 i18n
   .use(LanguageDetector) // يكتشف لغة المتصفح
@@ -16,6 +17,7 @@ i18n
       en: { translation: translationEN },
       es: { translation: translationES },
       ca: { translation: translationCA },
+      fr: { translation: translationFR },
     },
     fallbackLng: 'en', // لغة افتراضية
     interpolation: {

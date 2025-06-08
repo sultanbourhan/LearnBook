@@ -26,6 +26,8 @@ import AuthSuccess from './components/AuthSuccess';
 import Chat_AI from './components/Chat_Ai/Chat_AI';
 import Not_Found from './components/Not_Found/Not_Found'
 import Info_menu from './components/Info_menu/Info_menu';
+import GetOnePost from './components/getOnePost/getOnePost';
+
 
 function AppContent() {
   const navigate = useNavigate();
@@ -84,6 +86,7 @@ const [showComponent, setShowComponent] = useState(false)
         <Route path='/Loading_main' element={<><Loading_main /></>} />
         <Route path="/auth/success" element={<AuthSuccess />} />
         <Route path="/chat_bot" element={<Chat_AI />} />
+        <Route path="/getOnePost/:type/:idPost" element={<GetOnePost />} />
         <Route path="*" element={<Not_Found />} />
 
       </Routes>
