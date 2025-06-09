@@ -32,6 +32,9 @@ import Shools from "../Shools/Shools";
 import { useParams } from "react-router-dom";
 import Chat from "../chat/Chat";
 import { useTranslation } from 'react-i18next';
+import { useUser } from "../Context";
+import { useNavigate } from "react-router-dom";
+
 
 const MediaGalleryModal = ({
   isOpen,
@@ -131,6 +134,13 @@ const Get_Shoole_By_Id = () => {
 
   const { idParams } = useParams();
 
+    const { setUserById } = useUser();
+      const { showChat, setShowChat } = useUser();
+    
+    
+      const { Share_post_chat, setShare_post_chat } = useUser();
+      const Navigate = useNavigate();
+
   // const [Mydata, SetMydata] = useState();
   const { data: getmydata } = useMyData();
   const Mydata = getmydata?._id;
@@ -140,6 +150,7 @@ const Get_Shoole_By_Id = () => {
   const solvedPost_2 = getmydata?.solvedPost_2;
   const solvedPost_3 = getmydata?.solvedPost_3;
   const solvedPost_4 = getmydata?.solvedPost_4;
+    const Mydata_Frends= getmydata?.friends
 
   const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -472,6 +483,9 @@ const Get_Shoole_By_Id = () => {
       console.error(err);
     }
   };
+
+
+  const [Shareid , setShareid] = useState("")
 
   return (
     <>
@@ -958,7 +972,7 @@ const Get_Shoole_By_Id = () => {
                                 </svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                 <svg
                                   className="inter-icon"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1026,7 +1040,26 @@ const Get_Shoole_By_Id = () => {
                               }
                             </div>
                           </div>
+                                                                <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
 
+              </div>
                           {showCommentForPostId === post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -1420,7 +1453,7 @@ const Get_Shoole_By_Id = () => {
                                 </svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                 <svg
                                   className="inter-icon"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1488,7 +1521,26 @@ const Get_Shoole_By_Id = () => {
                               }
                             </div>
                           </div>
+                                                            <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
 
+              </div>
                           {showCommentForPostId === post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -1893,7 +1945,7 @@ const Get_Shoole_By_Id = () => {
                                 </svg>
                                 <span>Comment</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                 <svg
                                   className="inter-icon"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1961,7 +2013,26 @@ const Get_Shoole_By_Id = () => {
                               }
                             </div>
                           </div>
+                                                            <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
 
+              </div>
                           {showCommentForPostId === post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -2354,7 +2425,7 @@ const Get_Shoole_By_Id = () => {
                                 </svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                 <svg
                                   className="inter-icon"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -2422,7 +2493,26 @@ const Get_Shoole_By_Id = () => {
                               }
                             </div>
                           </div>
+                                                                <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
 
+              </div>
                           {showCommentForPostId === post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -2922,7 +3012,7 @@ const Get_Shoole_By_Id = () => {
                                 </svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                 <svg
                                   className="inter-icon"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -2990,6 +3080,26 @@ const Get_Shoole_By_Id = () => {
                               }
                             </div>
                           </div>
+                                                            <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                           {showCommentForPostId === post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -3263,7 +3373,7 @@ const Get_Shoole_By_Id = () => {
                                 </svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                 <svg
                                   className="inter-icon"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -3331,6 +3441,26 @@ const Get_Shoole_By_Id = () => {
                               }
                             </div>
                           </div>
+                                                            <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                           {showCommentForPostId === post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>

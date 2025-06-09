@@ -22,6 +22,8 @@ import Info_menu from "../Info_menu/Info_menu";
 import Shools from "../Shools/Shools";
 import Chat from "../chat/Chat";
 import { useTranslation } from 'react-i18next';
+import { useUser } from "../Context";
+import { useNavigate } from "react-router-dom";
 
 const MediaGalleryModal = ({ isOpen, onClose, media, currentIndex, setCurrentIndex }) => {
   if (!isOpen) return null;
@@ -118,6 +120,14 @@ const apiUrl = import.meta.env.VITE_API_URL;
   const solvedPost_2 = getmydata?.solvedPost_2
   const solvedPost_3 = getmydata?.solvedPost_3
   const solvedPost_4 = getmydata?.solvedPost_4
+   const Mydata_Frends= getmydata?.friends
+
+       const { setUserById } = useUser();
+         const { showChat, setShowChat } = useUser();
+       
+       
+         const { Share_post_chat, setShare_post_chat } = useUser();
+         const Navigate = useNavigate();
 
 
   const { data: getallpost, isLoading, isFetching } = useAllPost();
@@ -430,6 +440,9 @@ const apiUrl = import.meta.env.VITE_API_URL;
     }
 
 
+
+      const [Shareid , setShareid] = useState("")
+
   return (
     <div className="home">
       <div className="container">
@@ -646,7 +659,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
                                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post.post._id ? setShareid("")  : setShareid(post.post._id)}}>
                                 <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                 <span>{t('Share')}</span>
                               </div>
@@ -680,6 +693,26 @@ const apiUrl = import.meta.env.VITE_API_URL;
                               }
                             </div>
                           </div>
+                           <div className={`Frends_share  ${ Shareid === post.post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.post.type}/${post.post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
             
                           {showCommentForPostId === post.post._id && (
                             <div className="blore">
@@ -994,7 +1027,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
                                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post.post._id ? setShareid("")  : setShareid(post.post._id)}}>
                                 <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                 <span>{t('Share')}</span>
                               </div>
@@ -1026,6 +1059,26 @@ const apiUrl = import.meta.env.VITE_API_URL;
                               }
                             </div>
                           </div>
+                                                     <div className={`Frends_share  ${ Shareid === post.post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.post.type}/${post.post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
             
                           {showCommentForPostId === post.post._id && (
                             <div className="blore">
@@ -1344,7 +1397,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
                                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post.post._id ? setShareid("")  : setShareid(post.post._id)}}>
                                 <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                 <span>{t('Share')}</span>
                               </div>
@@ -1376,7 +1429,26 @@ const apiUrl = import.meta.env.VITE_API_URL;
                               }
                             </div>
                           </div>
-            
+                                       <div className={`Frends_share  ${ Shareid === post.post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.post.type}/${post.post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                           {showCommentForPostId === post.post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -1687,7 +1759,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
                                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                 <span>{t('Comment')}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post.post._id ? setShareid("")  : setShareid(post.post._id)}}>
                                 <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                 <span>{t('Share')}</span>
                               </div>
@@ -1719,7 +1791,26 @@ const apiUrl = import.meta.env.VITE_API_URL;
                               }
                             </div>
                           </div>
-            
+                                       <div className={`Frends_share  ${ Shareid === post.post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.post.type}/${post.post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                           {showCommentForPostId === post.post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -2112,7 +2203,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
                                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                 <span>{t("Comment")}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post.post._id ? setShareid("")  : setShareid(post.post._id)}}>
                                 <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                 <span>{t("Share")}</span>
                               </div>
@@ -2144,6 +2235,26 @@ const apiUrl = import.meta.env.VITE_API_URL;
                               }
                             </div>
                           </div>
+                                                     <div className={`Frends_share  ${ Shareid === post.post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.post.type}/${post.post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                           {showCommentForPostId === post.post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>
@@ -2352,7 +2463,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
                                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                 <span>{t("Comment")}</span>
                               </div>
-                              <div className="infotest">
+                              <div className="infotest" onClick={()=>{Shareid === post.post._id ? setShareid("")  : setShareid(post.post._id)}}>
                                 <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                 <span>{t("Share")}</span>
                               </div>
@@ -2384,6 +2495,26 @@ const apiUrl = import.meta.env.VITE_API_URL;
                               }
                             </div>
                           </div>
+                                                     <div className={`Frends_share  ${ Shareid === post.post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.post.type}/${post.post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                           {showCommentForPostId === post.post._id && (
                             <div className="blore">
                               <div className="comments" ref={commentRef}>

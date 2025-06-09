@@ -338,6 +338,12 @@
   text-decoration: underline;
 }
 
+.chat-container .me p span{
+  color: white;
+  opacity: 0.7;
+
+}
+
 .chat-container .other {
   align-self: flex-start;
 }
@@ -354,6 +360,11 @@
 }
 .chat-container .other p:hover a{
   text-decoration: underline;
+}
+
+.chat-container .other p span{
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 .chat-container .chat-input {

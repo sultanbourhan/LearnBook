@@ -19,6 +19,7 @@ import { useUser } from "../Context";
 import EmojiPicker from "emoji-picker-react";
 import Loading_Chat from "../Loading_Chat/Loading_Chat";
 import { useTranslation } from 'react-i18next';
+import { format } from 'date-fns';
 
 const ChatBetweenUsers = () => {
 const { t } = useTranslation();
@@ -482,20 +483,25 @@ const { t } = useTranslation();
                   )}
 
 
-                  <p>
-                    {isValidUrl(msg.content) ? (
-                      <a
-                        href={msg.content}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ cursor: "pointer" }}
-                      >
-                        {msg.content}
-                      </a>
-                    ) : (
-                      msg.content
-                    )}
-                  </p>
+                 <p>
+                  {isValidUrl(msg.content) ? (
+                    <a
+                      href={msg.content}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ cursor: "pointer" }}
+                    >
+                      {msg.content}
+                    </a>
+                  ) : (
+                    msg.content
+                  )}
+                  <br />
+                  <span style={{ fontSize: "0.75rem" }}>
+                    {format(new Date(msg?.timestamp), 'hh:mm a')}
+                  </span>
+                </p>
+
                 </div>
               );
             })}

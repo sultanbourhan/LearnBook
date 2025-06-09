@@ -44,6 +44,7 @@ import { useAllPost } from "../UseAllPost";
 import { useQueryClient } from "@tanstack/react-query";
 import Loading_Filter_post from "../Loading_Filter_post/Loading_Filter_post";
 import { useTranslation } from 'react-i18next';
+import { useUser } from "../Context";
 
 const MediaGalleryModal = ({
   isOpen,
@@ -145,6 +146,12 @@ const Profile = () => {
    const [Deleting_Please, setDeleting_Please] = useState(false);
   const [Confirm_deletionn, setConfirm_deletionn] = useState(false);
 
+  const { setUserById } = useUser();
+    const { showChat, setShowChat } = useUser();
+  
+  
+    const { Share_post_chat, setShare_post_chat } = useUser();
+
   
 const Navigate = useNavigate();
 
@@ -159,6 +166,7 @@ const Navigate = useNavigate();
   const solvedPost_2 = getmydata?.solvedPost_2
   const solvedPost_3 = getmydata?.solvedPost_3
   const solvedPost_4 = getmydata?.solvedPost_4
+  const Mydata_Frends= getmydata?.friends
 
 
   const { data: getallpost} = useAllPost();
@@ -495,6 +503,9 @@ queryClient.invalidateQueries(['AllPost']);
       setnone_Bookmark([...none_Bookmark , id])
       // console.log(none_Bookmark)
     }
+
+
+    const [Shareid , setShareid] = useState("")
 
 
   return (
@@ -896,7 +907,7 @@ queryClient.invalidateQueries(['AllPost']);
                                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                         <span>{t('Comment')}</span>
                                       </div>
-                                      <div className="infotest">
+                                      <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                         <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                         <span>{t('Share')}</span>
                                       </div>
@@ -928,6 +939,26 @@ queryClient.invalidateQueries(['AllPost']);
                                       }
                                     </div>
                                   </div>
+                                  <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                     
                                   {showCommentForPostId === post._id && (
                                     <div className="blore">
@@ -1275,7 +1306,7 @@ queryClient.invalidateQueries(['AllPost']);
                                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                         <span>{t('Comment')}</span>
                                       </div>
-                                      <div className="infotest">
+                                      <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                         <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                         <span>{t('Share')}</span>
                                       </div>
@@ -1305,6 +1336,27 @@ queryClient.invalidateQueries(['AllPost']);
                                       }
                                     </div>
                                   </div>
+
+                                  <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                     
                                   {showCommentForPostId === post._id && (
                                     <div className="blore">
@@ -1656,7 +1708,7 @@ queryClient.invalidateQueries(['AllPost']);
                                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                         <span>{t('Comment')}</span>
                                       </div>
-                                      <div className="infotest">
+                                      <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                         <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                         <span>{t('Share')}</span>
                                       </div>
@@ -1686,6 +1738,26 @@ queryClient.invalidateQueries(['AllPost']);
                                       }
                                     </div>
                                   </div>
+                                  <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                     
                                   {showCommentForPostId === post._id && (
                                     <div className="blore">
@@ -2030,7 +2102,7 @@ queryClient.invalidateQueries(['AllPost']);
                                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                         <span>{t('Comment')}</span>
                                       </div>
-                                      <div className="infotest">
+                                      <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                         <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                         <span>{t('Share')}</span>
                                       </div>
@@ -2060,6 +2132,26 @@ queryClient.invalidateQueries(['AllPost']);
                                       }
                                     </div>
                                   </div>
+                                  <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                     
                                   {showCommentForPostId === post._id && (
                                     <div className="blore">
@@ -2486,7 +2578,7 @@ queryClient.invalidateQueries(['AllPost']);
                                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                         <span>{t('Comment')}</span>
                                       </div>
-                                      <div className="infotest">
+                                      <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                         <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                         <span>{t('Share')}</span>
                                       </div>
@@ -2516,6 +2608,26 @@ queryClient.invalidateQueries(['AllPost']);
                                       }
                                     </div>
                                   </div>
+                                  <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                                   {showCommentForPostId === post._id && (
                                     <div className="blore">
                                       <div className="comments" ref={commentRef}>
@@ -2757,7 +2869,7 @@ queryClient.invalidateQueries(['AllPost']);
                                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                                         <span>{t('Comment')}</span>
                                       </div>
-                                      <div className="infotest">
+                                      <div className="infotest" onClick={()=>{Shareid === post._id ? setShareid("")  : setShareid(post._id)}}>
                                         <svg className="inter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
                                         <span>{t('Share')}</span>
                                       </div>
@@ -2787,6 +2899,26 @@ queryClient.invalidateQueries(['AllPost']);
                                       }
                                     </div>
                                   </div>
+                                  <div className={`Frends_share  ${ Shareid === post._id ? "block" : ""}`}>
+                {Mydata_Frends?.map((frend)=>
+                  <div className="frends" key={frend._id}
+                  onClick={()=> {setShare_post_chat(`http://localhost:3000/getOnePost/${post.type}/${post._id}`); setShowChat(true);
+                  setUserById(frend.friend); if (window.innerWidth < 1191) {
+                    Navigate("/chat");
+                  }}}
+                  >
+                    <img src={
+                        frend?.friend?.profilImage
+                          ? frend.friend?.profilImage?.startsWith("http")
+                            ? frend.friend?.profilImage
+                            : `${apiUrl}/user/${frend.friend?.profilImage}`
+                          : "/image/pngegg.png"
+                      } alt="" />
+                    <p>{frend?.friend?.name}</p>
+                  </div>
+                )}
+
+              </div>
                                   {showCommentForPostId === post._id && (
                                     <div className="blore">
                                       <div className="comments" ref={commentRef}>
